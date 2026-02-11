@@ -39,6 +39,7 @@
    - Argument 1 must be `PICKUP_*`; if you only have `WEAPON_*`, map first with `GetPickupHashFromWeapon`.
    - `modelHash` is not the pickup identity; it only controls model override behavior.
    - Health and armour pickups are state-dependent: they are typically only collected/triggered when the player is below max health/armour.
+   - Health pickup amount behaves differently from armour: observed behavior is that health pickups restore to full regardless of configured amount, while armour uses the configured amount as increment.
 
 ## Native: CreatePickupRotate
 
@@ -98,6 +99,7 @@
 9. **Notes / pitfalls**:
    - In scans, successful ambient spawns often mapped to `CEventNetworkPlayerCollectedAmbientPickup`.
    - Health and armour pickup collection can be suppressed if player health/armour is already full.
+   - Same amount nuance applies here: health pickup amount is effectively ignored in observed behavior (full heal), armour amount controls added armour.
 
 ## Native: CreatePortablePickup
 
