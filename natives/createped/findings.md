@@ -36,3 +36,4 @@ This domain is scaffolded to mirror pickup structure and is ready for dedicated 
 - **[documented]** Promote validated claims into `core/helpers/events` when behavior is stable.
 
 
+

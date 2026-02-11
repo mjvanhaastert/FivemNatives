@@ -2,6 +2,13 @@
 
 > Official docs base URL used in entries below: https://docs.fivem.net/natives/
 
+## Input Rules (Important)
+
+- `CreatePickup` and `CreatePickupRotate` expect a pickup hash (`PICKUP_*`) as argument 1, not a weapon hash (`WEAPON_*`).
+- If you only have `WEAPON_*`, first map it with `GetPickupHashFromWeapon`.
+- `modelHash` is a model override/default hint and is separate from `pickupHash`.
+- `modelHash = 0` is usually stable because the engine uses the default pickup model.
+
 ## Native: CreatePickup
 
 1. **Native name**: `CreatePickup`
@@ -29,6 +36,9 @@
 9. **Notes / pitfalls**:
    - Valid handle does not guarantee collect event.
    - Weapon/ammo state can affect practical collect outcomes.
+   - Argument 1 must be `PICKUP_*`; if you only have `WEAPON_*`, map first with `GetPickupHashFromWeapon`.
+   - `modelHash` is not the pickup identity; it only controls model override behavior.
+   - Health and armour pickups are state-dependent: they are typically only collected/triggered when the player is below max health/armour.
 
 ## Native: CreatePickupRotate
 
@@ -58,6 +68,8 @@
 9. **Notes / pitfalls**:
    - This native was the previous baseline in historical scan comparisons.
    - Rotation itself did not explain most failures in observed data.
+   - Argument 1 must be a pickup hash (`PICKUP_*`), not a weapon hash.
+   - Wrong `modelHash` can interfere with visuals/collectability; `0` is often safest.
 
 ## Native: CreateAmbientPickup
 
@@ -85,6 +97,7 @@
 8. **Related natives**: `CreateNonNetworkedAmbientPickup`, `HasPickupBeenCollected`
 9. **Notes / pitfalls**:
    - In scans, successful ambient spawns often mapped to `CEventNetworkPlayerCollectedAmbientPickup`.
+   - Health and armour pickup collection can be suppressed if player health/armour is already full.
 
 ## Native: CreatePortablePickup
 

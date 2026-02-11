@@ -73,7 +73,7 @@
 4. **What it does**: Sets pickup respawn/regeneration timing.
 5. **Arguments**:
    - `pickup`: pickup handle.
-   - `durationMs`: cooldown in ms.
+   - `durationMs`: cooldown duration in milliseconds.
 6. **Return behavior**:
    - No return value.
 7. **Minimal example**:
@@ -84,7 +84,79 @@
    ```
 8. **Related natives**: `SetPickupDoNotExpire`, `CEventNetworkPickupRespawned`
 9. **Notes / pitfalls**:
+   - `duration` is always in milliseconds.
    - Recommended for dedicated respawn-event tests.
+
+## Native: DoesPickupOfTypeExistInArea
+
+1. **Native name**: `DoesPickupOfTypeExistInArea`
+2. **Native URL**: https://docs.fivem.net/natives/
+3. **Signature**: `DoesPickupOfTypeExistInArea(pickupHash, x, y, z, radius) -> bool`
+4. **What it does**: Checks if a pickup of a specific type exists near a position.
+5. **Arguments**:
+   - `pickupHash`: hash of the pickup type (`PICKUP_*`).
+   - `x`, `y`, `z`: center coordinates.
+   - `radius`: search radius.
+6. **Return behavior**:
+   - `true` if at least one pickup of the requested type is found.
+   - `false` if none are found in the area.
+7. **Minimal example**:
+   ```lua
+   local c = GetEntityCoords(PlayerPedId())
+   local exists = DoesPickupOfTypeExistInArea(`PICKUP_WEAPON_PISTOL`, c.x, c.y, c.z, 5.0)
+   print("DoesPickupOfTypeExistInArea:", exists)
+   ```
+8. **Related natives**: `DoesPickupExist`, `CreatePickup`
+9. **Notes / pitfalls**:
+   - Useful for area assertions when single-handle tracking is not enough.
+
+## Native: ToggleUsePickupsForPlayer
+
+1. **Native name**: `ToggleUsePickupsForPlayer` (`_TOGGLE_USE_PICKUPS_FOR_PLAYER`)
+2. **Native URL**: https://docs.fivem.net/natives/
+3. **Signature**: `ToggleUsePickupsForPlayer(player, pickupHash, toggle)`
+4. **What it does**: Enables or disables whether a player can use/receive a specific pickup type.
+5. **Arguments**:
+   - `player`: player ID (`PlayerId()` for local player).
+   - `pickupHash`: pickup hash (`PICKUP_*`).
+   - `toggle`: `true` enables, `false` disables.
+6. **Return behavior**:
+   - No return value.
+7. **Minimal example**:
+   ```lua
+   local pickup = GetHashKey("PICKUP_WEAPON_ADVANCEDRIFLE")
+   ToggleUsePickupsForPlayer(PlayerId(), pickup, true)
+   ```
+8. **Related natives**: `CreatePickup`, `CreatePickupRotate`, `GetPickupHashFromWeapon`
+9. **Notes / pitfalls**:
+   - Critical for weapon pickup behavior: disabled state can make weapon pickups appear non-working.
+   - Native hashes: `0x616093EC6B139DD9`, `0x7FADB4B9`.
+
+## Native: GetPickupHashFromWeapon
+
+1. **Native name**: `GetPickupHashFromWeapon`
+2. **Native URL**: https://docs.fivem.net/natives/
+3. **Signature**: `GetPickupHashFromWeapon(weaponHash) -> pickupHash`
+4. **What it does**: Maps a `WEAPON_*` hash to its corresponding `PICKUP_WEAPON_*` hash.
+5. **Arguments**:
+   - `weaponHash`: weapon hash (for example `joaat("WEAPON_PISTOL")`).
+6. **Return behavior**:
+   - Returns matching pickup hash when mapping exists.
+   - May return `0` when no mapping exists.
+7. **Minimal example**:
+   ```lua
+   local weapon = GetHashKey("WEAPON_PISTOL")
+   local pickup = GetPickupHashFromWeapon(weapon)
+   print("Pickup hash from weapon:", pickup)
+   ```
+8. **Related natives**: `CreatePickup`, `CreatePickupRotate`, `ToggleUsePickupsForPlayer`
+9. **Notes / pitfalls**:
+   - Use this only when you start from `WEAPON_*`; create natives still require `PICKUP_*` as first argument.
+
+## Validation Guidance
+
+- `IsPickupWeaponObjectValid` is only valid for weapon pickup objects.
+- For non-weapon pickups (for example health), `IsObjectAPickup` is the relevant generic check.
 
 ## Native: SetPickupDoNotExpire
 

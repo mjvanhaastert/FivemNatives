@@ -49,3 +49,4 @@ Ped-specific game event documentation is fragmented; this file tracks relevant e
    - Useful when validating spawn + seat occupancy workflows.
 
 
+

@@ -25,6 +25,7 @@ Official event docs for these CEvent variants are sparse; this file records curr
 8. **Related natives/events**: `CreatePickup`, `CreatePickupRotate`, `CEventNetworkPlayerCollectedAmbientPickup`
 9. **Notes / pitfalls**:
    - Main positive signal for many successful `CreatePickup`/`CreatePickupRotate` test cases.
+   - If `ToggleUsePickupsForPlayer` is disabled for that pickup hash, expected collect flow can be suppressed.
 
 ## Event: CEventNetworkPlayerCollectedAmbientPickup
 

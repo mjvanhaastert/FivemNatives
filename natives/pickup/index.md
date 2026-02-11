@@ -6,6 +6,8 @@ Pickup creation, pickup state helpers, and pickup-related game events used in Fi
 
 - Creation and spawning behavior for pickup natives.
 - Validation helpers (`DoesPickupExist`, collected state, cleanup).
+- Player pickup enable/disable behavior (`ToggleUsePickupsForPlayer`).
+- Hash mapping guidance (`WEAPON_*` to `PICKUP_*` via `GetPickupHashFromWeapon`).
 - Event mapping for collect/drop/respawn paths.
 - Runtime matrix notes from `trp_bunker` scans.
 

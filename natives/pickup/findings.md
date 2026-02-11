@@ -20,7 +20,8 @@ This file intentionally contains runtime behavior and test conclusions, separate
 - **[observed]** `CreateAmbientPickup` and `CreateNonNetworkedAmbientPickup` successes usually pair with `CEventNetworkPlayerCollectedAmbientPickup`.
 - **[observed]** Portable create natives can return valid handles while still showing no collect event.
 - **[observed]** `0`/`nil` return strongly correlates with invalid native/hash combinations.
-- **[hypothesis]** Some weapon pickup hashes may be gated by ped weapon/ammo state, suppressing collect events despite valid handle creation.
+- **[observed]** Weapon pickup failures in prior tests were caused by disabled pickup usage; enabling with `ToggleUsePickupsForPlayer(PlayerId(), pickupHash, true)` restores expected behavior.
+- **[observed]** Health and armour pickups are condition-based: if the player is already at max health/armour, collect trigger and pickup result can be absent.
 - **[hypothesis]** Some hashes may be legacy/single-player biased and not fully functional in network sessions.
 
 ## Working Hash Set (Latest Run, 45)
@@ -258,6 +259,15 @@ This file intentionally contains runtime behavior and test conclusions, separate
 - **[observed] Invalid-return example**  
   `PICKUP_AMMO_SMG (292537574)` showed `0` for multiple native variants, matching non-working outcome.
 
+## Hash and Validation Clarifications
+
+- **[observed]** `GetPickupHashFromWeapon(joaat("WEAPON_PISTOL"))` matched `joaat("PICKUP_WEAPON_PISTOL")` in your test (`-105925489`).
+- **[documented]** If you already have a `PICKUP_*` hash, use it directly for `CreatePickup`/`CreatePickupRotate`.
+- **[documented]** If you only have `WEAPON_*`, convert with `GetPickupHashFromWeapon` first.
+- **[observed]** `modelHash` is separate from pickup identity and acts as model override/default hint; `modelHash=0` is often stable.
+- **[observed]** `IsPickupWeaponObjectValid` is not a general pickup validator; it is weapon-specific.
+- **[observed]** For non-weapon pickups (for example health), `IsObjectAPickup` is the relevant check.
+
 ## Open Questions
 
 - **[hypothesis]** Exact meaning of unknown native params (`p4`, `p6`, `p8`, `p9`, `p10`) per variant.
@@ -270,5 +280,10 @@ This file intentionally contains runtime behavior and test conclusions, separate
 - **[documented]** Run dedicated portable sequence: create -> attach -> detach -> drop event capture.
 - **[documented]** Run dedicated respawn suite using regeneration/expire controls.
 - **[documented]** Export matrix to CSV/JSON (`hash,name,native,returnValid,event,worked`) for diffing over time.
+
+## References
+
+- **[documented]** https://docs.fivem.net/docs/game-references/pickup-hashes/
+- **[documented]** https://docs.fivem.net/docs/game-references/weapon-models/
 
 
