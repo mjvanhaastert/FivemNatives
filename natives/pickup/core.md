@@ -40,6 +40,7 @@
    - `modelHash` is not the pickup identity; it only controls model override behavior.
    - Health and armour pickups are state-dependent: they are typically only collected/triggered when the player is below max health/armour.
    - Health pickup amount behaves differently from armour: observed behavior is that health pickups restore to full regardless of configured amount, while armour uses the configured amount as increment.
+    - Observed behavior: this variant is used as networked pickup creation and the pickup spins automatically.
 
 ## Native: CreatePickupRotate
 
@@ -71,6 +72,7 @@
    - Rotation itself did not explain most failures in observed data.
    - Argument 1 must be a pickup hash (`PICKUP_*`), not a weapon hash.
    - Wrong `modelHash` can interfere with visuals/collectability; `0` is often safest.
+    - Observed behavior: this variant is treated as non-networked in your tests; it allows setting rotation values but still shows automatic spinning behavior.
 
 ## Native: CreateAmbientPickup
 

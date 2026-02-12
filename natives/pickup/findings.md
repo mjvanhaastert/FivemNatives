@@ -23,6 +23,8 @@ This file intentionally contains runtime behavior and test conclusions, separate
 - **[observed]** Weapon pickup failures in prior tests were caused by disabled pickup usage; enabling with `ToggleUsePickupsForPlayer(PlayerId(), pickupHash, true)` restores expected behavior.
 - **[observed]** Health and armour pickups are condition-based: if the player is already at max health/armour, collect trigger and pickup result can be absent.
 - **[observed]** Health and armour amount handling differs: health pickup amount appears ignored (full heal), while armour pickup amount determines how much armour is granted.
+- **[observed]** `CreatePickup` behaved as networked in your tests and the created pickup rotated/spun automatically.
+- **[observed]** `CreatePickupRotate` behaved as non-networked in your tests; manual rotation inputs are possible, but pickups still spin automatically around their axis.
 - **[hypothesis]** Some hashes may be legacy/single-player biased and not fully functional in network sessions.
 
 ## Working Hash Set (Latest Run, 45)
