@@ -49,5 +49,11 @@ FivemNatives/
 
 - `pickup`
 - `createped`
+- `cfgSettings`
+- `pedConfigFlag`
 
+## External References
 
+- FiveM Security Best Practices: https://fixfx.wiki/docs/cfx/best-practices/security
+- FiveM Official Docs: https://docs.fivem.net/docs/
+- 1of1Servers FiveM Guides: https://docs.1of1servers.com/1-of-1-game-server-guides/fivem/
