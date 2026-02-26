@@ -1,59 +1,51 @@
-# FiveM Natives Knowledge Base
+# FiveM Info Hub
 
-Community-maintained documentation for FiveM/CFX natives, combining official references with reproducible runtime findings.
+Een groeiende verzameling van alles wat met FiveM te maken heeft.
 
-## Repository Structure
+Doel van deze repo:
+- Praktische informatie op een centrale plek bewaren.
+- Betrouwbare bronnen en nuttige websites bundelen.
+- Handige tips en workflows delen voor development en serverbeheer.
+- Coding stijlen en best practices vastleggen die in de praktijk werken.
 
-```text
-FivemNatives/
-  README.md
-  natives/
-    <domain>/
-      index.md
-      core.md
-      helpers.md
-      events.md
-      findings.md
-```
+## Wat je hier kunt vinden
 
-- `index.md`: domain overview, scope, links to all subfiles.
-- `core.md`: main natives for the domain.
-- `helpers.md`: supporting/maintenance natives.
-- `events.md`: related game events and payload notes.
-- `findings.md`: runtime behavior, test matrices, and open questions.
+- FiveM basisinformatie en uitleg
+- Natives en technische referenties
+- Handige websites, tools en documentatie
+- Handige tips (setup, debugging, performance, security)
+- Coding manieren, patronen en voorbeelden
+- Best practices voor scripts, resources en onderhoud
 
-## Evidence Labels
+## Voorbeelden
 
-- `documented`: stated in official docs or official source comments.
-- `observed`: seen in local runtime tests and logs.
-- `hypothesis`: reasoned assumption that still needs confirmation.
+- Deze repo bevat ook concrete scriptvoorbeelden in `examples/`.
+- In `examples/instructionalButtons/client.lua` staat een testimplementatie voor scaleform instructional buttons.
+- Testen in-game via command: `/sentinel_testbuttons [position] [durationMs]`
 
-## Add a New Domain
+## Richtlijn voor nieuwe content
 
-1. Create `natives/<new-domain>/`.
-2. Add `index.md`, `core.md`, `helpers.md`, `events.md`, and `findings.md`.
-3. Keep official knowledge in `core/helpers/events`.
-4. Keep runtime behavior in `findings` with confidence labels.
-5. Follow the standard entry format in every native entry:
-   1. Native name
-   2. Native URL
-   3. Signature
-   4. What it does
-   5. Arguments
-   6. Return behavior (including `0`/`nil` caveats)
-   7. Minimal example
-   8. Related natives
-   9. Notes / pitfalls
+Hou nieuwe pagina's kort, concreet en herbruikbaar:
+1. Onderwerp en korte context
+2. Waarom dit belangrijk is
+3. Praktische stappen of voorbeeld
+4. Valkuilen / veelgemaakte fouten
+5. Betrouwbare bronnen of links
 
-## Current Domains
+## Standaard labels (optioneel)
 
-- `pickup`
-- `createped`
-- `cfgSettings`
-- `pedConfigFlag`
+Gebruik deze labels om duidelijkheid te houden:
+- `official`: komt uit officiele FiveM/CFX documentatie
+- `tested`: zelf getest in praktijk
+- `community`: gedeeld door community, nog niet volledig geverifieerd
 
-## External References
+## Handige startbronnen
 
-- FiveM Security Best Practices: https://fixfx.wiki/docs/cfx/best-practices/security
 - FiveM Official Docs: https://docs.fivem.net/docs/
+- FiveM Security Best Practices: https://fixfx.wiki/docs/cfx/best-practices/security
 - 1of1Servers FiveM Guides: https://docs.1of1servers.com/1-of-1-game-server-guides/fivem/
+
+## Contributie
+
+Suggesties en verbeteringen zijn welkom.
+Voeg vooral kennis toe die anderen direct kunnen toepassen.
